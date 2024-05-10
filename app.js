@@ -127,6 +127,141 @@ function triggerConfetti() {
 
 
 
+// let spanTime = document.querySelector("#time");
+// let flipCount = document.querySelector("#flip-count");
+
+// let flipped = false;
+// let locked = false;
+// let flipCounts = 0;
+// let time = 30;
+// let timerInterval;
+
+// let clickedCards = [];
+
+// let totalPairs = document.querySelectorAll(".card").length / 2;
+// let matchedPairs = 0;
+
+// var modal = document.getElementById("myModal");
+// var modal1 = document.getElementById("myModal1");
+// var closeButton = document.getElementById("closeModal");
+// var ReplayButton = document.getElementById("ReplayModal");
+
+// // closeButton.addEventListener("click", function(){
+// //   window.location.reload();
+// // })
+
+
+// function showModal() {
+//   modal.classList.remove("hidden");
+ 
+//   canvas.style.display = 'block';
+//   setTimeout(() => {
+//       canvas.style.display = 'none';
+//   }, 6000);
+//   triggerConfetti();
+// }
+
+
+// function closeModal() {
+//   modal.classList.add("hidden");
+//   window.location.reload();
+// }
+// function showmodal1(){
+//   modal1.classList.remove("hidden");
+// }
+
+// closeButton.addEventListener("click", closeModal);
+
+
+// ReplayButton.addEventListener("click", function(){
+//   window.location.reload();
+// })
+
+// function checkAllMatched() {
+//   if (matchedPairs === totalPairs) {
+//     showModal();
+//     modal1.classList.add("hidden");
+//   }
+// }
+
+
+// function flipCard(card) {
+//   if (!flipped && !clickedCards.includes(card) && !locked) {
+//     card.classList.add("flipped");
+//     flipCount.innerHTML = ++flipCounts;
+//     document.querySelector("#audioPlayer2").play();
+
+//     const images = card.querySelectorAll("img");
+//     // console.log(images[1]);
+//     // console.log(images);
+//     images.forEach((img) => {
+
+//       img.style.display = "none";
+//     });
+//     console.log( images[1]);
+//     images[1].style.display = "block";
+
+//     clickedCards.push(card);
+
+//     if (clickedCards.length === 2) {
+//       const [firstCard, secondCard] = clickedCards;
+
+//       const firstImage = firstCard.querySelectorAll("img")[1].src;
+//       const secondImage = secondCard.querySelectorAll("img")[1].src;
+
+//       locked = true;
+
+//       if (firstImage === secondImage) {
+//         clickedCards = [];
+//         locked = false;
+//         firstCard.classList.add('matched', 'animate-pulse');
+//         secondCard.classList.add('matched', 'animate-pulse');
+//         matchedPairs++;
+//         checkAllMatched();
+         
+//       } else {
+//         setTimeout(() => {
+//           clickedCards.forEach((card) => {
+//             card.classList.remove("flipped");
+//             card.querySelectorAll("img").forEach((img) => {
+//               img.style.display = "none";
+//             });
+//             card.querySelectorAll("img")[0].style.display = "block";
+//           });
+//           clickedCards = [];
+//           locked = false;
+//         }, 800);
+//       }
+//     }
+
+  
+
+//     if (!timerInterval) {
+//       timerInterval = setInterval(() => {
+//         if (time < 0) {
+//           clearInterval(timerInterval);
+//           timerInterval = null;
+//           document.querySelector("#audioPlayer2").pause();
+//           locked = true;
+//          showmodal1()
+//         } else {
+//           spanTime.innerHTML = time-- + " s";
+//         }
+//       }, 1000);
+
+//     }
+//   } else if (clickedCards.length === 1 && clickedCards[0] === card) {
+//     flipCard(card);
+//   }
+// }
+
+// Refresh button functionality
+// document.querySelector(".button").addEventListener("click", () => {
+//   window.location.reload();
+// });
+
+
+
 let spanTime = document.querySelector("#time");
 let flipCount = document.querySelector("#flip-count");
 
@@ -146,14 +281,8 @@ var modal1 = document.getElementById("myModal1");
 var closeButton = document.getElementById("closeModal");
 var ReplayButton = document.getElementById("ReplayModal");
 
-// closeButton.addEventListener("click", function(){
-//   window.location.reload();
-// })
-
-
 function showModal() {
   modal.classList.remove("hidden");
- 
   canvas.style.display = 'block';
   setTimeout(() => {
       canvas.style.display = 'none';
@@ -161,24 +290,29 @@ function showModal() {
   triggerConfetti();
 }
 
-
 function closeModal() {
   modal.classList.add("hidden");
+  window.location.reload();
+}
+
+function showmodal1() {
+  modal1.classList.remove("hidden");
 }
 
 closeButton.addEventListener("click", closeModal);
-ReplayButton.addEventListener("click", closeModal);
 
 ReplayButton.addEventListener("click", function(){
   window.location.reload();
-})
+});
 
 function checkAllMatched() {
   if (matchedPairs === totalPairs) {
+    clearInterval(timerInterval); // Stop the timer
+    document.querySelector("#audioPlayer2").pause();
+    locked = true;
     showModal();
   }
 }
-
 
 function flipCard(card) {
   if (!flipped && !clickedCards.includes(card) && !locked) {
@@ -187,23 +321,17 @@ function flipCard(card) {
     document.querySelector("#audioPlayer2").play();
 
     const images = card.querySelectorAll("img");
-    // console.log(images[1]);
-    // console.log(images);
     images.forEach((img) => {
-
       img.style.display = "none";
     });
-    console.log( images[1]);
     images[1].style.display = "block";
 
     clickedCards.push(card);
 
     if (clickedCards.length === 2) {
       const [firstCard, secondCard] = clickedCards;
-
       const firstImage = firstCard.querySelectorAll("img")[1].src;
       const secondImage = secondCard.querySelectorAll("img")[1].src;
-
       locked = true;
 
       if (firstImage === secondImage) {
@@ -213,7 +341,6 @@ function flipCard(card) {
         secondCard.classList.add('matched', 'animate-pulse');
         matchedPairs++;
         checkAllMatched();
-         
       } else {
         setTimeout(() => {
           clickedCards.forEach((card) => {
@@ -229,8 +356,6 @@ function flipCard(card) {
       }
     }
 
-  
-
     if (!timerInterval) {
       timerInterval = setInterval(() => {
         if (time < 0) {
@@ -238,23 +363,16 @@ function flipCard(card) {
           timerInterval = null;
           document.querySelector("#audioPlayer2").pause();
           locked = true;
-          modal1.classList.remove("hidden");
+          showmodal1();
         } else {
           spanTime.innerHTML = time-- + " s";
         }
       }, 1000);
-
     }
   } else if (clickedCards.length === 1 && clickedCards[0] === card) {
     flipCard(card);
   }
 }
-
-// Refresh button functionality
-// document.querySelector(".button").addEventListener("click", () => {
-//   window.location.reload();
-// });
-
 
 
 
