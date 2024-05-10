@@ -133,7 +133,7 @@ let flipCount = document.querySelector("#flip-count");
 let flipped = false;
 let locked = false;
 let flipCounts = 0;
-let time = 0;
+let time = 30;
 let timerInterval;
 
 let clickedCards = [];
@@ -164,8 +164,8 @@ function showModal() {
 
 function closeModal() {
   modal.classList.add("hidden");
-  modal1.classList.add("hidden");
 }
+
 closeButton.addEventListener("click", closeModal);
 ReplayButton.addEventListener("click", closeModal);
 
@@ -176,7 +176,6 @@ ReplayButton.addEventListener("click", function(){
 function checkAllMatched() {
   if (matchedPairs === totalPairs) {
     showModal();
-
   }
 }
 
@@ -226,7 +225,7 @@ function flipCard(card) {
           });
           clickedCards = [];
           locked = false;
-        }, 500);
+        }, 800);
       }
     }
 
@@ -234,18 +233,17 @@ function flipCard(card) {
 
     if (!timerInterval) {
       timerInterval = setInterval(() => {
-        if (time > 29) {
+        if (time < 0) {
           clearInterval(timerInterval);
           timerInterval = null;
           document.querySelector("#audioPlayer2").pause();
           locked = true;
           modal1.classList.remove("hidden");
-          // card.removeEventListener('click', flipCard);
-        }
-        else{
-          spanTime.innerHTML = ++time + " ms";
+        } else {
+          spanTime.innerHTML = time-- + " s";
         }
       }, 1000);
+
     }
   } else if (clickedCards.length === 1 && clickedCards[0] === card) {
     flipCard(card);
