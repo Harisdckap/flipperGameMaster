@@ -266,7 +266,7 @@ function flipCard(card) {
 let hidingImgs = document.querySelectorAll(".hiding");
 console.log(hidingImgs);
 
-let Himg = ['../images/view-3d-businessman.jpg','./images/3d-rendering-cartoon-like-young-couple_23-2150797550.avif','../images/3d-rendering-cartoon-like-young-couple_23-2150797530.avif','./images/3d-rendering-cartoon-like-young-couple_23-2150797552.jpg','./images/3d-rendering-cartoon-like-young-couple_23-2150797528.jpg','./images/view-3d-girl-with-open-book_23-2150709876.jpg'];
+let Himg = ['./images/view-3d-businessman.jpg','./images/3d-rendering-cartoon-like-young-couple_23-2150797550.avif','./images/3d-rendering-cartoon-like-young-couple_23-2150797530.avif','./images/3d-rendering-cartoon-like-young-couple_23-2150797552.jpg','./images/3d-rendering-cartoon-like-young-couple_23-2150797528.jpg','./images/view-3d-girl-with-open-book_23-2150709876.jpg'];
 let arr = [];
 
 randonFlippingImages();
